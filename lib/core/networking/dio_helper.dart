@@ -7,7 +7,9 @@ class DioHelper {
   static Dio? dio;
 
   static initDio() {
-    dio ??= Dio(BaseOptions(baseUrl: "", receiveDataWhenStatusError: true));
+    dio ??= Dio(BaseOptions(
+        baseUrl: "",
+        receiveDataWhenStatusError: true));
     dio!.interceptors.add(PrettyDioLogger());
   }
 
