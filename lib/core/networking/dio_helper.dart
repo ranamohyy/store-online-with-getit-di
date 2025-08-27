@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:implement_clean_code_for_store/core/networking/end_ponits.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioHelper {
@@ -8,7 +9,7 @@ class DioHelper {
 
   static initDio() {
     dio ??= Dio(BaseOptions(
-        baseUrl: "",
+        baseUrl: EndPoints.baseUrl,
         receiveDataWhenStatusError: true));
     dio!.interceptors.add(PrettyDioLogger());
   }
@@ -31,7 +32,7 @@ class DioHelper {
       Response response = await dio!.post(path, data: data);
       return response;
     } catch (e) {
-      log(e.toString());
+      rethrow;
     }
   }
 }
