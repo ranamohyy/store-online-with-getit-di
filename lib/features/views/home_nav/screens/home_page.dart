@@ -4,11 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:implement_clean_code_for_store/core/helpers/app_assets.dart';
 import 'package:implement_clean_code_for_store/core/helpers/app_colors.dart';
 import 'package:implement_clean_code_for_store/core/helpers/app_field.dart';
-import 'package:implement_clean_code_for_store/core/networking/dio_helper.dart';
-import 'package:implement_clean_code_for_store/core/repo/home_repo.dart';
 import 'package:implement_clean_code_for_store/features/models/product_model.dart';
 import 'package:implement_clean_code_for_store/features/views/product_details/view.dart';
-
 import '../../../../core/di/get_it.dart';
 import '../../../../core/helpers/app_text_styles.dart';
 import '../../../controllers/home_cubit/product_cubit.dart';
