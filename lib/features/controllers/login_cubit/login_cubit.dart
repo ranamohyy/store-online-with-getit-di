@@ -1,4 +1,3 @@
-import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,23 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this.authRepo) : super(LoginInitial());
   final TextEditingController nameController=TextEditingController();
   final TextEditingController passwordController=TextEditingController();
+
+
+
+  bool obscureText= true;
+
+  void changeEyeIcon(){
+
+    obscureText = !obscureText;
+    emit(LoginInitial());
+
+
+  }
+
+
+
+
+
 
    void login()async{
      emit(LoginLoading());
