@@ -87,7 +87,8 @@ class LoginScreen extends StatelessWidget {
                         child:
                         cubit.obscureText==true?
                         Icon(Icons.visibility_off,color: AppColors.greyColor,):
-                        Icon(Icons.visibility,color: AppColors.greyColor,)
+                        Icon(Icons.visibility
+                          ,color: AppColors.greyColor,)
 
                     ) ,
                   ),
