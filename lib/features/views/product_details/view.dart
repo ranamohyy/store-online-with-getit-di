@@ -1,14 +1,20 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:implement_clean_code_for_store/core/helpers/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:implement_clean_code_for_store/core/helpers/app_button.dart';
+import 'package:implement_clean_code_for_store/core/helpers/my_snack_bar.dart';
+import 'package:implement_clean_code_for_store/features/controllers/cart_cubit/cart_cubit.dart';
 import 'package:implement_clean_code_for_store/features/models/product_model.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key,required this.model});
+  const ProductDetails({super.key, required this.model});
+
   final ProductModel model;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(horizontal: 12),
         height: 80,
@@ -26,7 +32,7 @@ class ProductDetails extends StatelessWidget {
                     color: Colors.grey),
               ),
               Text(
-                r"$"+model.price.toString(),
+                r"$" + model.price.toString(),
                 style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w900,
@@ -38,27 +44,28 @@ class ProductDetails extends StatelessWidget {
             width: 22,
           ),
           Expanded(
-            child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    fixedSize: Size.fromHeight(50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    backgroundColor: AppColors.primaryColor),
-                child: Row(
-                  spacing: 10,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.shopping_bag_outlined,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      "Add To Cart",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                )),
+              child:
+              BlocConsumer<CartCubit, CartState>(
+              listener: (context, state) {
+                if(state is addCartSuccess){
+                  appSnackBar("item added successfully", AnimatedSnackBarType.success, context);
+                }
+                if(state is addCartFailure){
+                  appSnackBar("fail to add", AnimatedSnackBarType.success, context);
+                }
+              },
+                builder: (context, state) {
+                  if(state is addCartLoading){
+                   return Center(child: CircularProgressIndicator());
+                  }
+                  return AppButton(
+                      text: "Add To Cart",
+                      onPressed: () {
+                        context.read<CartCubit>().addToCart();
+                      }
+                  );
+                },
+              )
           )
         ]),
       ),
@@ -73,13 +80,13 @@ class ProductDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
-               height: 360,
-                child: Image.network(model.image??"")),
+                height: 360,
+                child: Image.network(model.image ?? "")),
             SizedBox(
               height: 12,
             ),
             Text(
-             model.title?? "Fit Polo T Shirt",
+              model.title ?? "Fit Polo T Shirt",
               style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
@@ -96,7 +103,7 @@ class ProductDetails extends StatelessWidget {
                   color: Colors.orange,
                 ),
                 Text(
-                  "${model.rating!.rate??4}/5",
+                  "${model.rating!.rate ?? 4}/5",
                   style: TextStyle(
                       decoration: TextDecoration.underline,
                       fontSize: 16,
@@ -104,7 +111,7 @@ class ProductDetails extends StatelessWidget {
                       color: Colors.black),
                 ),
                 Text(
-                  "(${model.rating!.count??45} reviews)",
+                  "(${model.rating!.count ?? 45} reviews)",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -116,7 +123,8 @@ class ProductDetails extends StatelessWidget {
               height: 12,
             ),
             Text(
-             model.description?? "Blue T Shirt . Good All Men and Suits for All of Them.Blue T Shirt . Good for All Men and Suits for All of Them",
+              model.description ??
+                  "Blue T Shirt . Good All Men and Suits for All of Them.Blue T Shirt . Good for All Men and Suits for All of Them",
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
