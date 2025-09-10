@@ -15,7 +15,7 @@ DioHelper(){initDio();}
   }
 
    getRequest(
-      {required String path, required Map<String, dynamic> data}) async {
+      {required String path,  Map<String, dynamic>? data}) async {
     try {
       Response response = await dio!.get(path, queryParameters: data);
       return response;
