@@ -44,8 +44,4 @@ The app allows users to sign up, log in, and browse different product categories
 * Payment gateway (Stripe / PayPal).
 * Wishlist & Favorites.
 * Dark mode support.
-
-
-
-تحبي أجهزهولك كـ **ملف README.md جاهز للتحميل** ولا تفضلي تنسخيه زي ما هو؟
 ```
