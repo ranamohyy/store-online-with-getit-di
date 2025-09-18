@@ -36,12 +36,9 @@ The app allows users to sign up, log in, and browse different product categories
 * 🛒 Cart Page
 * 🔑 Authentication Screens (Register, Login,)
 
----
-
 ## 🔮 Future Improvements
 
 * Integration with real backend API.
 * Payment gateway (Stripe / PayPal).
 * Wishlist & Favorites.
 * Dark mode support.
-```
